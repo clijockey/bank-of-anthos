@@ -34,18 +34,18 @@ from opentelemetry.propagators import set_global_httptextformat
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import SimpleExportSpanProcessor
 
-# Set up tracing and export spans to Cloud Trace.
-trace.set_tracer_provider(TracerProvider())
-CLOUD_TRACE_EXPORTER = CloudTraceSpanExporter()
-trace.get_tracer_provider().add_span_processor(
-    SimpleExportSpanProcessor(CLOUD_TRACE_EXPORTER)
-)
+# # Set up tracing and export spans to Cloud Trace.
+# trace.set_tracer_provider(TracerProvider())
+# CLOUD_TRACE_EXPORTER = CloudTraceSpanExporter()
+# trace.get_tracer_provider().add_span_processor(
+#     SimpleExportSpanProcessor(CLOUD_TRACE_EXPORTER)
+# )
 
-set_global_httptextformat(CloudTraceFormatPropagator())
+# set_global_httptextformat(CloudTraceFormatPropagator())
 
 APP = Flask(__name__)
 
-# Add tracing auto-instrumentation for Flask, jinja and requests
+# # Add tracing auto-instrumentation for Flask, jinja and requests
 FlaskInstrumentor().instrument_app(APP)
 RequestsInstrumentor().instrument()
 Jinja2Instrumentor().instrument()
@@ -494,7 +494,7 @@ APP.config["LOGIN_URI"] = 'http://{}/login'.format(
     os.environ.get('USERSERVICE_API_ADDR'))
 APP.config["CONTACTS_URI"] = 'http://{}/contacts'.format(
     os.environ.get('CONTACTS_API_ADDR'))
-APP.config['PUBLIC_KEY'] = open(os.environ.get('PUB_KEY_PATH'), 'r').read()
+# APP.config['PUBLIC_KEY'] = open(os.environ.get('PUB_KEY_PATH'), 'r').read()
 APP.config['LOCAL_ROUTING'] = os.getenv('LOCAL_ROUTING_NUM')
 APP.config['BACKEND_TIMEOUT'] = 4  # timeout in seconds for calls to the backend
 APP.config['TOKEN_NAME'] = 'token'
